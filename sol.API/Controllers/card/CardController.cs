@@ -5,7 +5,8 @@ using System.Net.WebSockets;
 namespace sol.API.Controllers.card
 {
     [ApiController]
-    [Route("api/controller")]
+    [Route("api/[controller]")]
+
     public class CardController : Controller
     {
         private readonly OhStudioContext _context;
@@ -14,36 +15,62 @@ namespace sol.API.Controllers.card
             _context = context;
         }
         [HttpPost("AddCard")]
-        public ActionResult AddCard(DTO.model.cardcs card)
+        public async Task<IActionResult> AddCard([FromForm] DTO.Model.CardDto card, IFormFile ImageFile)
         {
-            Entities.Card cardEntity = new Entities.Card();
-            cardEntity.Id = card.Id;
-            cardEntity.Titel = card.Titel;
-            cardEntity.UrlImage = card.UrlImage;
-            cardEntity.UrlLogo = card.UrlLogo;
-            cardEntity.Description = card.Description;
+            if (ImageFile != null && ImageFile.Length > 0)
+            {
+                // Ensure directory exists
+                var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "./images/");
+                if (!Directory.Exists(uploadPath))
+                {
+                    Directory.CreateDirectory(uploadPath);
+                }
+
+                // Unique file name
+                var uniqueFileName = $"{Guid.NewGuid()}_{ImageFile.FileName}";
+                var filePath = Path.Combine(uploadPath, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await ImageFile.CopyToAsync(stream);
+                }
+
+                // Build accessible URL path
+                var request = HttpContext.Request;
+                var baseUrl = $"{request.Scheme}://{request.Host}";
+                card.UrlImage = $"{baseUrl}/images/{uniqueFileName}";
+            }
+
+            var cardEntity = new Entities.Card
+            {
+                
+                Titel = card.Titel,
+                UrlImage = card.UrlImage,
+                CompanyName = card.companyName,
+                Description = card.Description
+            };
 
             _context.Cards.Add(cardEntity);
-            _context.SaveChanges(); // save on database // dont allow to skip 
-               
+            await _context.SaveChangesAsync();
 
             return Ok(card);
         }
+
 
         [HttpGet("GetAllCard")]
         public ActionResult GetAllCard()
         {
 
-            var card = (from cd in _context.Cards        // this is select orm query to fetch data from data base ;
-                        select new DTO.model.cardcs
+            var cards = (from cd in _context.Cards        // this is select orm query to fetch data from data base ;
+                        select new DTO.Model.CardDto
                         {
                             Titel = cd.Titel,
-                            UrlLogo = cd.UrlLogo,
+                            companyName = cd.CompanyName,
                             Description = cd.Description,
                             UrlImage = cd.UrlImage
                         }
                         ).ToList();
-            return Ok(card);
+            return Ok(cards);
 
 
         }

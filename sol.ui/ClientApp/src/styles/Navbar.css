@@ -1,0 +1,127 @@
+﻿/* Navbar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+/*    background: transparent;*/
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: none;
+    background-color: sandybrown;
+}
+
+    .navbar.scrolled {
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 2rem;
+    }
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+.navbar-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+    .navbar-links a {
+        color: #000;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .navbar-links a:hover {
+            color: #555;
+        }
+
+.text-danger {
+    color: #ff0000;
+}
+
+.navbar-links a:hover {
+    color: whitesmoke;
+    text-decoration: underline; 
+}
+
+
+/* Mobile Navbar */
+@media screen and (max-width: 768px) {
+    .navbar-links {
+        display: none; /* Hide navbar links by default on mobile */
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 60px; /* Adjust this value if needed */
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 1rem 0;
+    }
+
+        .navbar-links.active {
+            display: flex; /* Show navbar links when the menu is active */
+        }
+
+        .navbar-links a {
+            padding: 1rem;
+            width: 100%;
+            text-align: center;
+        }
+
+    .navbar-brand {
+        font-size: 1.2rem; /* Adjust brand size for mobile */
+    }
+
+    /* Hamburger menu */
+    .hamburger {
+        display: block;
+        cursor: pointer;
+        color: #000;
+        font-size: 1.8rem;
+    }
+}
+
+/* Scroll to top button styles */
+.scroll-up {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+}
+
+    .scroll-up:hover {
+        opacity: 1;
+    }
+
+/* Optional: You may want to hide the scroll-up button on very small screens if needed */
+@media screen and (max-width: 480px) {
+    .scroll-up {
+        bottom: 10px;
+        right: 10px;
+    }
+}

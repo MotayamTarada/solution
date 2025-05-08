@@ -1,96 +1,41 @@
-﻿//import React from 'react';
-//import { Container, Row, Col, Card } from 'react-bootstrap';
-
-//const projects = [
-//    {
-//        title: 'Harvard',
-//        description: 'Empowering youth with neuroscience',
-//        image: 'https://via.placeholder.com/300x200',
-//    },
-//    {
-//        title: 'Neon Horizons',
-//        description: 'Welcome to the cyberscape',
-//        image: 'https://via.placeholder.com/300x200',
-//    },
-//];
-
-//const Work = () => (
-//    <section className="py-5 bg-white">
-//        <Container>
-//            <h2 className="text-center mb-5">Partners + Projects</h2>
-//            <Row>
-//                {projects.map((project, index) => (
-//                    <Col md={4} key={index} className="mb-4">
-//                        <Card>
-//                            <Card.Img variant="top" src={project.image} alt={project.title} />
-//                            <Card.Body>
-//                                <Card.Title>{project.title}</Card.Title>
-//                                <Card.Text>{project.description}</Card.Text>
-//                            </Card.Body>
-//                        </Card>
-//                    </Col>
-//                ))}
-//            </Row>
-//        </Container>
-//    </section>
-//);
-
-//export default Work;
-
-import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import { motion } from 'framer-motion';
-import  { useContext } from 'react';
-import  { useRef } from 'react';
+﻿import React from 'react';
+import '../styles/Work.css'; 
 const projects = [
     {
         title: 'Harvard',
         description: 'Empowering youth with neuroscience',
-        image: 'https://haptic.studio/images/harvard.jpg'
+        image: 'images/peronal1.avif',
+
     },
     {
         title: 'Neon Horizons',
         description: 'Welcome to the cyberscape',
-        image: 'https://haptic.studio/images/neon.jpg'
+        image: 'images/personal2.avif'
     },
     {
         title: 'Quantum',
         description: 'Redefining digital experiences',
-        image: 'https://haptic.studio/images/quantum.jpg'
+        image: 'images/personal3'
     }
 ];
 
 const Work = () => (
-    <section className="work-section py-5">
-        <Container>
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-            >
-                <h2 className="text-center mb-5">Partners + Projects</h2>
-            </motion.div>
+    <section className="work-section">
+        <div className="work-title-wrapper">
+            <h2 className="work-title">Partners + Projects</h2>
+        </div>
 
-            <Row>
-                {projects.map((project, index) => (
-                    <Col md={4} key={index} className="mb-4">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                        >
-                            <Card className="h-100 work-card">
-                                <Card.Img variant="top" src={project.image} alt={project.title} />
-                                <Card.Body>
-                                    <Card.Title>{project.title}</Card.Title>
-                                    <Card.Text>{project.description}</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </motion.div>
-                    </Col>
-                ))}
-            </Row>
-        </Container>
+        <div className="work-grid">
+            {projects.map((project, index) => (
+                <div key={index} className="work-card">
+                    <img src={project.image} alt={project.title} className="work-image" />
+                    <div className="work-content">
+                        <h3>{project.title}</h3>
+                        <p>{project.description}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
     </section>
 );
 

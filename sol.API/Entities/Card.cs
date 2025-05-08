@@ -11,7 +11,7 @@ public partial class Card
 
     public string Description { get; set; } = null!;
 
-    public string UrlImage { get; set; } = null!;
+    public string? UrlImage { get; set; }
 
-    public string? UrlLogo { get; set; }
+    public string CompanyName { get; set; } = null!;
 }

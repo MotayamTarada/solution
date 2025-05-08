@@ -27,18 +27,18 @@ public partial class OhStudioContext : DbContext
         {
             entity.ToTable("card");
 
+            entity.Property(e => e.CompanyName)
+                .HasMaxLength(500)
+                .HasColumnName("companyName");
             entity.Property(e => e.Description)
-                .HasMaxLength(50)
+                .HasMaxLength(100)
                 .HasColumnName("description");
             entity.Property(e => e.Titel)
                 .HasMaxLength(50)
                 .HasColumnName("titel");
             entity.Property(e => e.UrlImage)
-                .HasMaxLength(50)
+                .HasMaxLength(500)
                 .HasColumnName("urlImage");
-            entity.Property(e => e.UrlLogo)
-                .HasMaxLength(50)
-                .HasColumnName("urlLogo");
         });
 
         OnModelCreatingPartial(modelBuilder);
