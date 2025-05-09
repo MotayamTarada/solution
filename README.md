@@ -35,7 +35,7 @@ GO
 - Go to run multiple both project sol.Api and sol.ui ,
 ==> other can run frontend only ,
 ==================================================================================================================================================================
-* The websit hapitc-studio build static webite linked for oh-studio for both word **Hapitc**
+* The websit hapitc-studio build static, webite linked for oh-studio for both word **Hapitc**
   -Frontend React.js , CSS , Html
 ==================================================================================================================================================================
 run use
