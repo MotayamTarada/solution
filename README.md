@@ -46,4 +46,3 @@ npm start
 Note => 1) portfolio component contain code oh-studio dynamic 
         2) remain components refer to hapitc studio 
 
-ى
